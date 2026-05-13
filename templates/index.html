@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Performance Predictor</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0D1B2A, #1565C0);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            width: 420px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            text-align: center;
+            color: #0D1B2A;
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+        p.subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 13px;
+            margin-bottom: 28px;
+        }
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 6px;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 18px;
+            transition: border 0.2s;
+        }
+        input:focus {
+            outline: none;
+            border-color: #1565C0;
+        }
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #1565C0, #0288D1);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        button:hover { opacity: 0.9; }
+        .result {
+            margin-top: 24px;
+            padding: 16px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 22px;
+            font-weight: 700;
+            background: #f0f7ff;
+            color: #1565C0;
+            border: 2px solid #1565C0;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🎓 Student Performance Predictor</h1>
+        <p class="subtitle">Enter student details to predict Pass or Fail</p>
+
+        <form action="/predict" method="POST">
+            <label>Attendance (%)</label>
+            <input type="number" name="attendance" placeholder="e.g. 85" min="0" max="100" required>
+
+            <label>Study Hours per Day</label>
+            <input type="number" name="study_hours" placeholder="e.g. 4" min="0" max="24" required>
+
+            <label>Previous Exam Score (out of 100)</label>
+            <input type="number" name="prev_score" placeholder="e.g. 75" min="0" max="100" required>
+
+            <button type="submit">🔍 Predict Result</button>
+        </form>
+
+        {% if result %}
+        <div class="result">{{ result }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
